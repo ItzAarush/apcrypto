@@ -1,0 +1,874 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #fafafa;
+}
+
+/* Layout */
+.dashboard {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+
+/* Main content */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+}
+
+.content {
+    padding: 25px 0 25px 20px;
+    overflow-y: scroll;
+    width: 98%;
+}
+
+.mainHead {
+    color: var(--Dark, #342E59);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.cards {
+    margin-top: 23px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.coinImg {
+    width: 45px;
+}
+
+.cryptoCard {
+    width: 23%;
+    min-width: 250px;
+    height: 130px;
+    border-radius: 20px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 19px;
+}
+
+.cryptoCard:hover {
+    transition: 0.2s ease-in-out;
+    transform: translateY(-10%);
+}
+
+.cryptoBalance {
+    color: var(--Dark, #342E59);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.highLowImg {
+    width: 15px;
+}
+
+.increase {
+    color: var(--Green, #13B440);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.decrease {
+    color: var(--Red, #F04444);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cardDetails span:nth-child(3) {
+    color: var(--Grey-03, #818181);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.chartArea {
+    width: 100%;
+    height: fit-content;
+    border-radius: 20px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 24px;
+}
+
+.semiCircleChart {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: fit-content;
+}
+
+#myPieChart {
+    width: 300px !important;
+}
+
+.semi-donut {
+    --percentage: 0;
+    --fill: #ff0;
+    width: 200px;
+    height: 100px;
+    position: relative;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    overflow: hidden;
+    color: var(--fill);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+
+    &:after {
+        content: '';
+        width: 200px;
+        height: 200px;
+        border: 20px solid;
+        border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) var(--fill) var(--fill);
+        position: absolute;
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+        box-sizing: border-box;
+        transform: rotate(calc(1deg * (-45 + var(--percentage) * 1.8)));
+        animation: fillAnimation 1s ease-in;
+    }
+}
+
+.semi-donut-model-2 {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 150px 150px 0 0;
+    overflow: hidden;
+    color: var(--fill);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+
+    &:before,
+    &:after {
+        content: '';
+        width: 200px;
+        height: 100px;
+        border: 20px solid var(--fill);
+        border-top: none;
+        position: absolute;
+        transform-origin: 50% 0% 0;
+        border-radius: 0 0 300px 300px;
+        box-sizing: border-box;
+        left: 0;
+        top: 100%;
+    }
+
+    &:before {
+        border-color: rgba(0, 0, 0, .15);
+        transform: rotate(180deg);
+    }
+
+    &:after {
+        z-index: 3;
+        animation: 1s fillGraphAnimation ease-in;
+        transform: rotate(calc(1deg * (var(--percentage) * 1.8)));
+    }
+
+    &:hover {
+        &:after {
+            opacity: .8;
+            cursor: pointer;
+        }
+    }
+}
+
+.multi-graph {
+    width: 300px;
+    height: 150px;
+    position: relative;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    &:before {
+        content: '';
+        width: 300px;
+        height: 150px;
+        border: 20px solid rgba(0, 0, 0, .15);
+        border-bottom: none;
+        position: absolute;
+        box-sizing: border-box;
+        transform-origin: 50% 0%;
+        border-radius: 300px 300px 0 0;
+        left: 0;
+        top: 0;
+    }
+
+    .graph {
+        width: 300px;
+        height: 150px;
+        border: 20px solid var(--fill);
+        border-top: none;
+        position: absolute;
+        transform-origin: 50% 0% 0;
+        border-radius: 0 0 300px 300px;
+        left: 0;
+        top: 100%;
+        z-index: 5;
+        animation: 1s fillGraphAnimation ease-in;
+        transform: rotate(calc(1deg * (var(--percentage) * 1.8)));
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:after {
+            content: attr(data-name);
+            content: attr(data-name) ' ' counter(varible) '%';
+            counter-reset: varible var(--percentage);
+            background: var(--fill);
+            box-sizing: border-box;
+            border-radius: 2px;
+            color: #fff;
+            font-weight: 200;
+            font-size: 12px;
+            height: 20px;
+            padding: 3px 5px;
+            top: 0px;
+            position: absolute;
+            left: 0;
+            transform: rotate(calc(-1deg * var(--percentage) * 1.8)) translate(-30px, 0px);
+            transition: 0.2s ease-in;
+            transform-origin: 0 50% 0;
+            opacity: 0;
+        }
+
+        &:hover {
+            opacity: 0.8;
+
+            &:after {
+                opacity: 1;
+                left: 30px;
+            }
+        }
+    }
+}
+
+.creditCard {
+    width: 400px;
+}
+
+.creditCard svg {
+    opacity: 0;
+    width: 400px;
+}
+
+.linechart {
+    background-color: white;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.contentarea1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+    height: fit-content;
+    flex-wrap: wrap;
+}
+
+#marketOverviewChart {
+    height: 245px;
+    width: 100%;
+}
+
+.recentActivitiesBoxes {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.recentActivities::-webkit-scrollbar {
+    display: none;
+}
+
+.recentActivities {
+    width: 40%;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.02);
+    padding: 33px 20px;
+    min-width: 320px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.saleActivities {
+    width: 29%;
+    border-radius: 20px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.02);
+    padding: 33px 20px;
+    min-width: 320px;
+
+}
+
+.buyActivities {
+    width: 29%;
+    border-radius: 20px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.02);
+    padding: 33px 20px;
+    min-width: 320px;
+
+}
+
+.actHead {
+    color: var(--Dark, #342E59);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.selectActPeriod {
+    border-radius: 42px;
+    border: 1px solid var(--Grey-01, #d9d9d9);
+    display: flex;
+    align-items: center;
+}
+
+.selectActPeriod span {
+    border-radius: 22px;
+    color: var(--Dark, #342E59);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px;
+}
+
+.selectActPeriod span:hover,
+.periodActive {
+    color: white !important;
+    background: var(--Primary, #2258BF) !important;
+    cursor: pointer;
+}
+
+.activitiesTable table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.activitiesTable th,
+.activitiesTable td {
+    padding: 10px;
+    text-align: left;
+}
+
+.activitiesTable th {
+    font-weight: 500;
+}
+
+.activitiesTable tr:hover {
+    background-color: #f9f9f9;
+}
+
+.coinImg {
+    width: 50px;
+}
+
+.coinSmall {
+    width: 25px;
+    margin-left: 3px;
+}
+
+.completed {
+    border-radius: 43px;
+    border: 2px solid #71B945;
+    color: #67EF14;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    display: inline-block;
+    text-align: center;
+    width: 90px;
+    height: 31px;
+    align-content: space-evenly;
+}
+
+.pending {
+    border-radius: 43px;
+    background-color: #eee;
+    color: var(--Grey-03, #818181);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    display: inline-block;
+    text-align: center;
+    width: 90px;
+    height: 31px;
+    align-content: space-evenly;
+}
+
+.cancelled {
+    border-radius: 43px;
+    border: 2px solid var(--Red, #F04444);
+    color: #FF7070;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    display: inline-block;
+    text-align: center;
+    width: 90px;
+    height: 31px;
+    align-content: space-evenly;
+}
+
+
+.coinDropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 17px 0;
+    height: 60px;
+}
+
+.coinDropdown-btn {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #eee;
+    color: black;
+    border: none;
+    border-radius: 56px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+.dropdownButton {
+    right: 10px;
+    width: 25px !important;
+    position: absolute;
+}
+
+.coinDropdown-btn img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.coinDropdown-btn:hover {
+    background-color: #eee;
+}
+
+.coinDropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.coinDropdown-menu li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.coinDropdown-menu li img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.coinDropdown-menu li:hover {
+    background-color: #f0f0f0;
+}
+
+.saleActivities1 table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.saleActivities1 table th {
+    color: #B9B5CB;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.saleActivities1 table td {
+    font-size: 15px;
+    font-weight: 500;
+    height: 40px;
+}
+
+.blueTable tr:hover {
+    background-color: #345D9D;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.OrangeTable tr:hover {
+    background-color: #FF6803;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.saleActivities1 tbody tr:hover td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.saleActivities1 tbody tr:hover td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.quickOptions {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.quickOptionsBox {
+    border-radius: 20px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.02);
+    width: 49.5%;
+    min-width: 400px;
+    padding: 33px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.quickOptionsHead {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.quickOptionsHead .coinDropdown {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 45px;
+    margin: 0;
+}
+
+.quickOptionsHead .coinDropdown-btn img {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.quickOptionsHead span {
+    color: var(--Dark, #342E59);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.quickOptionsHead .coinDropdown-btn {
+    background-color: white;
+    border: 1px solid #e6e6e6;
+}
+
+.transferAmountHead {
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    height: 51px;
+    margin: 15px 0;
+    border-radius: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.transferAmountHead span {
+    border-radius: 42px;
+    background: var(--Grey-01, #e3e3e3);
+    height: 100%;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--Dark, #342E59);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input.transferAmountInput {
+    height: 100%;
+    border: none;
+    color: black;
+    font-size: 16px;
+    text-align: right;
+    padding-right: 17px;
+    outline: none;
+}
+
+button.transferAmountButton {
+    width: 200px;
+    height: 48px;
+    border: none;
+    border-radius: 42px;
+    background: var(--Primary, #2258BF);
+    color: var(--White, #FFF);
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+button.transferAmountButton:hover,
+.quickTransfer button:hover {
+    filter: brightness(0.85);
+    transition: 0.15s ease-in-out;
+}
+
+.tradeQuickButton {
+    width: 100px;
+    height: 48px;
+    border: none;
+    border-radius: 42px;
+    color: var(--White, #FFF);
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.quickTransfer .transferAmountHead {
+    margin: 5px;
+}
+
+.tradeQuickButton img {
+    width: 15px;
+    margin-left: 10px;
+}
+
+.tradeQuickBuy {
+    background: var(--Primary, #13B440);
+}
+
+.tradeQuickSell {
+    background: var(--Primary, #F04444);
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#refresh-Icon.rotate, #setting-Icon.rotate {
+    animation: rotate360 0.5s ease-in-out; /* 360-degree rotation over 0.5 seconds */
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+#bell-icon.shake {
+    animation: shake 0.5s ease-in-out; /* Shake animation lasts 0.5 seconds */
+}
+
+
+@keyframes fillAnimation {
+    0% {
+        transform: rotate(-45deg);
+    }
+
+    50% {
+        transform: rotate(135deg);
+    }
+}
+
+@keyframes fillGraphAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+}
+
+@media (max-width: 1434px) {
+    .recentActivities {
+        width: 50%;
+    }
+
+    .saleActivities {
+        width: 49%;
+    }
+
+    .buyActivities {
+        margin-top: 15px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1195px) {
+    .recentActivities {
+        width: 100%;
+    }
+
+    .cryptoCard {
+        width: 49%;
+    }
+
+    .saleActivities {
+        width: 49%;
+        margin-top: 15px;
+    }
+
+    .buyActivities {
+        margin-top: 15px;
+        width: 49%;
+    }
+
+    .quickOptionsBox {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .contentarea1 {
+        flex-direction: column;
+        height: fit-content;
+        align-items: center;
+    }
+
+    .linechart {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 885px) {
+    .saleActivities {
+        width: 100%;
+    }
+}
+
+@media (max-width: 620px) {
+    .cryptoCard {
+        width: 100%;
+        height: 100px;
+    }
+}
+
+@media (max-width: 550px) {
+    .creditCard {
+        display: none;
+    }
+
+    .chartArea {
+        display: none;
+    }
+
+    .sidebar.shrinked {
+        width: 48px !important;
+    }
+
+    .sidebar-menu li {
+        padding: 1px 5px !important;
+    }
+
+    .sidebar-menu a {
+        padding: 8px 7px !important;
+    }
+
+    .sidebar.shrinked .burger-btn {
+        right: 0px !important;
+    }
+
+    .coinImg {
+        display: none;
+    }
+
+    .coinSmall {
+        display: none;
+    }
+
+    .content {
+        padding: 25px 0 25px 6px !important;
+        overflow-x: hidden;
+    }
+
+    .topbar {
+        padding: 10px 8px !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .main-content {
+        overflow: hidden !important;
+    }
+}
